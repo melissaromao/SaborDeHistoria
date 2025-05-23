@@ -1,17 +1,12 @@
 const express = require("express");
-const Receita = require("../models/Receita");
+const { createReceita, getReceitas, getReceitaById, updateReceita, deleteReceita } = require("../controllers/ReceitaController");
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
-    const receita = new Receita(req.body);
-    await receita.save();
-    res.status(201).json(receita);
-});
-
-router.get("/", async (req, res) => {
-    const receitas = await Receita.find();
-    res.json(receitas);
-});
+router.post("/", createReceita);      
+router.get("/", getReceitas);         
+router.get("/:id", getReceitaById);   
+router.put("/:id", updateReceita);    
+router.delete("/:id", deleteReceita); 
 
 module.exports = router;
