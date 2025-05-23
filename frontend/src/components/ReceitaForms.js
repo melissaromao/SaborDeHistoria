@@ -7,7 +7,10 @@ const ReceitaForms = () => {
   });
 
   const handleChange = (e) => {
-    setReceita({ ...receita, [e.target.name]: e.target.value });
+    setReceita({
+      ...receita,
+      [e.target.name]: e.target.name === "ingredientes" ? e.target.value.split(",") : e.target.value
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -17,15 +20,24 @@ const ReceitaForms = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="titulo" placeholder="Título" onChange={handleChange} />
-      <input name="subtitulo" placeholder="Subtítulo" onChange={handleChange} />
-      <textarea name="historia" placeholder="História" onChange={handleChange} />
-      <textarea name="ingredientes" placeholder="Ingredientes" onChange={handleChange} />
-      <textarea name="modo_preparo" placeholder="Modo de preparo" onChange={handleChange} />
-      <button type="submit">Salvar Receita</button>
-    </form>
-  );
+    <form className="container mt-4 p-4 border rounded shadow-sm bg-light" onSubmit={handleSubmit}>
+      <div className="mb-3">
+        <input className="form-control" name="titulo" placeholder="Título" onChange={handleChange} />
+      </div>
+      <div className="mb-3">
+        <input className="form-control" name="subtitulo" placeholder="Subtítulo" onChange={handleChange} />
+      </div>
+      <div className="mb-3">
+        <textarea className="form-control" name="historia" placeholder="História" onChange={handleChange} />
+      </div>
+      <div className="mb-3">
+        <textarea className="form-control" name="ingredientes" placeholder="Ingredientes" onChange={handleChange} />
+      </div>
+      <div className="mb-3">
+        <textarea className="form-control" name="modo_preparo" placeholder="Modo de preparo" onChange={handleChange} />
+      </div>
+      <button className="btn btn-primary w-100" type="submit">Salvar Receita</button>
+    </form>);
 };
 
 export default ReceitaForms;
